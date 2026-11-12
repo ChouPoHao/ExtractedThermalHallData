@@ -112,7 +112,7 @@ options = optimset('TolFun',1e-8);
 has_previous_solution = false;
 
 % ww = 0.3;
-ww = (0.01:0.01:0.03);
+ww = (0.01:0.01:0.06);
 
 split         = length(ww);
 Data0_full    = NaN(split,60+2);
@@ -139,7 +139,9 @@ T = 1e-6;
 hh = ww(ii);
 %T = ww(ii); 
 
-h_ext=-1/2*hh*e3.';
+% h_ext=-1/2*hh*e1.';
+h_ext=-1/2*hh*e2.';
+% h_ext=-1/2*hh*e3.';
 
 % RJ=[1,  4/9, -4/9,  4/9;
 %     0, -1/3,  4/3, -4/3;
@@ -196,8 +198,8 @@ Cy = build_blockC(chi_y);
 Cz = build_blockC(chi_z);
 
 DD_x = det(chi_x)+4*m_A*Cx*m_B.'; % <D_i D_j>_x
-DD_y = det(chi_y)+4*m_A*Cx*m_B.';
-DD_z = det(chi_z)+4*m_A*Cx*m_B.'; 
+DD_y = det(chi_y)+4*m_A*Cy*m_B.';
+DD_z = det(chi_z)+4*m_A*Cz*m_B.'; 
 
 Data0_DD(ii,1) = ww(ii);
 Data0_DD(ii,2) = DD_x;
@@ -272,8 +274,8 @@ SDz_AB = 2*Cz*m_B;
 SDz_BA = 2*Cz.'*m_A;
 
 DD_x = det(chi_x)+4*m_A.'*Cx*m_B; % <D_i D_j>_x
-DD_y = det(chi_y)+4*m_A.'*Cx*m_B;
-DD_z = det(chi_z)+4*m_A.'*Cx*m_B;    
+DD_y = det(chi_y)+4*m_A.'*Cy*m_B;
+DD_z = det(chi_z)+4*m_A.'*Cz*m_B;    
 
 MA = 1+sum(m_A.'*m_A);
 MB = 1+sum(m_B.'*m_B);
@@ -489,8 +491,8 @@ SDz_AB = 2*Cz*m_B;
 SDz_BA = 2*Cz.'*m_A;
 
 DD_x = det(chi_x)+4*m_A.'*Cx*m_B; % <D_i D_j>_x
-DD_y = det(chi_y)+4*m_A.'*Cx*m_B;
-DD_z = det(chi_z)+4*m_A.'*Cx*m_B;    
+DD_y = det(chi_y)+4*m_A.'*Cy*m_B;
+DD_z = det(chi_z)+4*m_A.'*Cz*m_B;    
 
 MA = 1+sum(m_A.'*m_A);
 MB = 1+sum(m_B.'*m_B);
